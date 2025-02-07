@@ -40,13 +40,20 @@
 </head>
 <body>
     <nav class="navbar">
-        <h2>Airline Sentiment </h2>
+        <h2>Airline Sentiment</h2>
     </nav>
     <div class="container">
         <h1>Welcome to Airline Sentiment Analysis</h1>
         <button id="predict-btn">Predict Sentiment</button>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("predict-btn").addEventListener("click", function () {
+                window.location.href = "/predict";
+            });
+        });
+    </script>
 </body>
 </html>
+
 
