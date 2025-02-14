@@ -1,7 +1,6 @@
 from flask import Flask, render_template,request,jsonify
 from test import TextToNum
 import pickle
-import sys
 app=Flask(__name__)
 @app.route("/")
 def Home():
@@ -24,12 +23,19 @@ def Predict():
         with open("model.pickle","rb") as mb_file:
             model = pickle.load(mb_file)
         pred= model.predict(dt)
-        print(pred)
-        return jsonify({"prediction":str(pred[0])})
+        if pred[0]==1:
+            pred = "Positive"
+        elif pred[0]==0:
+            pred = "Neutral"
+        else:
+            pred = "Negative"
+        # print(pred)
+        # return jsonify({"prediction":str(pred[0])})
+        return render_template("result.html",prediction=pred)
     else:
         return render_template("predict.html")
         
 
     
 if __name__=="__main__":
-    app.run(host="0.0.0.0",port=5050)
+    app.run(host="0.0.0.0",port=5000)
